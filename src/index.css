@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+@theme {
+  --color-secondary-fixed-dim: #c8c6c5;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-high: #ebe6f0;
+  --color-on-tertiary-fixed: #201c04;
+  --color-outline-variant: #c9c4d5;
+  --color-surface-low: #f6f2fc;
+  --color-outline: #787584;
+  --color-surface-variant: #e5e1e8;
+  --color-surface-container: #f1ecf6;
+  --color-primary: #4131a1;
+  --color-on-surface-variant: #474553;
+  --color-surface-bright: #fcf8ff;
+  --color-tertiary-fixed: #ece3bb;
+  --color-inverse-on-surface: #f3eff6;
+  --color-tertiary-fixed-dim: #d0c7a1;
+  --color-on-primary-fixed-variant: #4333a3;
+  --color-primary-container: #7265D5;
+  --color-on-secondary-fixed: #1c1b1b;
+  --color-surface-container-low: #f6f2f9;
+  --color-on-secondary-fixed-variant: #474746;
+  --color-surface-highest: #e5e1eb;
+  --color-on-secondary-container: #636262;
+  --color-tertiary: #4a4528;
+  --color-inverse-surface: #313035;
+  --color-on-error-container: #93000a;
+  --color-surface-container-high: #eae7ee;
+  --color-on-secondary: #ffffff;
+  --color-on-primary-fixed: #170065;
+  --color-background: #fcf8ff;
+  --color-success-surface: #E8F5E9;
+  --color-warning-surface: #FFF0F0;
+  --color-secondary: #5f5e5e;
+  --color-error: #ba1a1a;
+  --color-primary-fixed-dim: #c7bfff;
+  --color-inverse-primary: #c7bfff;
+  --color-on-tertiary: #ffffff;
+  --color-on-surface: #1c1b20;
+  --color-surface-dim: #dcd9df;
+  --color-error-container: #ffdad6;
+  --color-surface-container-highest: #e5e1e8;
+  --color-secondary-fixed: #e5e2e1;
+  --color-lavender-accent: #E8E4F8;
+  --color-surface-tint: #5b4dbc;
+  --color-secondary-container: #e2dfde;
+  --color-on-tertiary-container: #ded5ae;
+  --color-on-primary-container: #d6d0ff;
+  --color-on-background: #1c1b20;
+  --color-on-error: #ffffff;
+  --color-on-tertiary-fixed-variant: #4d472a;
+  --color-tertiary-container: #625c3d;
+  --color-primary-fixed: #e4dfff;
+  --color-surface: #fcf8ff;
+  --color-on-primary: #ffffff;
+  --font-display: "Plus Jakarta Sans", sans-serif;
+  --font-body: "Plus Jakarta Sans", sans-serif;
+}
+
+@layer base {
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  ::selection {
+    background: var(--color-primary-container);
+    color: var(--color-on-primary-container);
+  }
+}
