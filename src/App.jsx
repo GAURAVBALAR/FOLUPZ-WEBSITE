@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import './App.css'
 
@@ -8,15 +8,6 @@ const stagger = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] } },
   },
-}
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.1, duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] },
-  }),
 }
 
 function FloatingShape({ className, children, duration = 4, delay = 0 }) {
@@ -222,10 +213,6 @@ const tutorialsData = [
     items: ['Sync with Google/Outlook Contacts', 'Adjust AI assistance levels', 'Manage data export & privacy'],
   },
 ]
-
-function MaterialIcon({ icon, className = 'text-lg' }) {
-  return <span className={`material-symbols-outlined ${className}`}>{icon}</span>
-}
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -744,6 +731,92 @@ function HowItWorks() {
   )
 }
 
+const plans = [
+  {
+    name: 'Starter', price: 'Free', desc: 'Perfect for individual professionals getting started.',
+    features: ['Up to 50 contacts', 'Basic card scanning', 'Manual follow-up reminders', 'Email integration'],
+  },
+  {
+    name: 'Pro', price: '$12', period: '/mo', desc: 'For power networkers who need AI assistance.',
+    features: ['Unlimited contacts', 'AI-powered outreach drafts', 'Meeting recorder & transcripts', 'Smart lists & filters', 'Priority support'],
+    popular: true,
+  },
+  {
+    name: 'Team', price: '$29', period: '/mo', desc: 'For teams managing relationships together.',
+    features: ['Everything in Pro', 'Shared contacts & pipeline', 'Team analytics dashboard', 'CRM integrations (HubSpot, Salesforce)', 'Admin controls & SSO'],
+  },
+]
+
+function Pricing() {
+  return (
+    <section className="py-24 px-6 bg-surface" id="pricing">
+      <div className="max-w-6xl mx-auto">
+        <motion.div
+          className="text-center mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-80px' }}
+          variants={stagger.container}
+        >
+          <motion.span variants={stagger.item} className="text-[#4131a1] text-xs font-bold uppercase tracking-[0.1em] mb-2 block">Pricing</motion.span>
+          <motion.h2 variants={stagger.item} className="text-4xl md:text-5xl font-extrabold text-[#1c1b20] mb-4">Simple, transparent pricing.</motion.h2>
+          <motion.p variants={stagger.item} className="text-lg text-[#474553] max-w-2xl mx-auto">No hidden fees. No surprise charges. Start free and upgrade as your network grows.</motion.p>
+        </motion.div>
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-80px' }}
+          variants={stagger.container}
+        >
+          {plans.map((plan) => (
+            <motion.div
+              key={plan.name}
+              className={`relative rounded-2xl p-8 flex flex-col ${plan.popular ? 'bg-[#4131a1] text-white ring-2 ring-[#7265D5] shadow-2xl scale-105' : 'bg-white border border-[#c9c4d5]'}`}
+              variants={stagger.item}
+              whileHover={{ y: -8 }}
+            >
+              {plan.popular && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-[#7265D5] text-white text-xs font-bold rounded-full">
+                  Most Popular
+                </div>
+              )}
+              <div className="mb-6">
+                <h3 className={`text-xl font-bold mb-1 ${plan.popular ? 'text-white' : 'text-[#1c1b20]'}`}>{plan.name}</h3>
+                <div className="flex items-baseline gap-1">
+                  <span className={`text-4xl font-black ${plan.popular ? 'text-white' : 'text-[#1c1b20]'}`}>{plan.price}</span>
+                  {plan.period && <span className={`text-sm ${plan.popular ? 'text-white/70' : 'text-[#474553]'}`}>{plan.period}</span>}
+                </div>
+                <p className={`text-sm mt-2 ${plan.popular ? 'text-white/70' : 'text-[#474553]'}`}>{plan.desc}</p>
+              </div>
+              <ul className="space-y-3 mb-8 flex-1">
+                {plan.features.map((f) => (
+                  <li key={f} className="flex items-start gap-3">
+                    <span className={`material-symbols-outlined text-sm mt-0.5 ${plan.popular ? 'text-[#c7bfff]' : 'text-[#4131a1]'}`}>check</span>
+                    <span className={`text-sm ${plan.popular ? 'text-white/80' : 'text-[#474553]'}`}>{f}</span>
+                  </li>
+                ))}
+              </ul>
+              <motion.a
+                href="#download"
+                className={`text-center w-full py-3 rounded-full text-sm font-bold transition-all ${
+                  plan.popular
+                    ? 'bg-white text-[#4131a1] hover:shadow-xl'
+                    : 'bg-[#1c1b22] text-white hover:shadow-lg'
+                }`}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                {plan.name === 'Starter' ? 'Get Started Free' : `Start ${plan.name}`}
+              </motion.a>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
 function Tutorials() {
   return (
     <section className="py-24 px-6 bg-[#f6f2f9] border-t border-[#c9c4d5]/30" id="tutorials">
@@ -962,7 +1035,7 @@ function FinalCta() {
           <PulseRing className="absolute inset-[-8px] rounded-full border-2 border-white/40 pointer-events-none" />
           <motion.a
             href="#"
-            className="relative inline-flex items-center gap-2.5 px-10 py-4.5 bg-white text-[#4131a1] rounded-full text-base font-extrabold tracking-wide no-underline shadow-xl z-1"
+            className="relative inline-flex items-center gap-2.5 px-10 py-4 bg-white text-[#4131a1] rounded-full text-base font-extrabold tracking-wide no-underline shadow-xl z-1"
             whileHover={{ scale: 1.06, boxShadow: '0 12px 40px rgba(0,0,0,0.35)' }}
             whileTap={{ scale: 0.97 }}
           >
@@ -1019,6 +1092,7 @@ function App() {
       <BentoGrid />
       <FeaturesGrid />
       <HowItWorks />
+      <Pricing />
       <Tutorials />
       <Testimonials />
       <FinalCta />
